@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="GL">
+      <UniqueIdentifier>{9155c8ec-6dde-4dc7-b60e-3468547b1b34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDX">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{45a121e8-8bc3-4c4f-99a0-fbf5b092e91c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLProgram.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="GLShader.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="SDX_Application.cpp">
+      <Filter>SDX</Filter>
+    </ClCompile>
+    <ClCompile Include="SDX_Keyboard.cpp">
+      <Filter>SDX</Filter>
+    </ClCompile>
+    <ClCompile Include="SDX_Mouse.cpp">
+      <Filter>SDX</Filter>
+    </ClCompile>
+    <ClCompile Include="SDX_System.cpp">
+      <Filter>SDX</Filter>
+    </ClCompile>
+    <ClCompile Include="SDX_Window.cpp">
+      <Filter>SDX</Filter>
+    </ClCompile>
+    <ClCompile Include="SDX_Display.cpp">
+      <Filter>SDX</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLMesh.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="GLModel.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="GLMatrix.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GLShader.hpp">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="GLProgram.hpp">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="GLMatrix.hpp">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="SDX_Window.hpp">
+      <Filter>SDX</Filter>
+    </ClInclude>
+    <ClInclude Include="SDX_Mouse.hpp">
+      <Filter>SDX</Filter>
+    </ClInclude>
+    <ClInclude Include="SDX_Keyboard.hpp">
+      <Filter>SDX</Filter>
+    </ClInclude>
+    <ClInclude Include="SDX_Application.hpp">
+      <Filter>SDX</Filter>
+    </ClInclude>
+    <ClInclude Include="MyApplication.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDX_Display.hpp">
+      <Filter>SDX</Filter>
+    </ClInclude>
+    <ClInclude Include="GLUniform.hpp">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredShader.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GLMesh.hpp">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="GLModel.hpp">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="SDX_System.hpp">
+      <Filter>SDX</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image_write.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GLMatrix.inl">
+      <Filter>GL</Filter>
+    </None>
+    <None Include="SDX_Mouse.inl">
+      <Filter>SDX</Filter>
+    </None>
+    <None Include="GLProgram.inl">
+      <Filter>GL</Filter>
+    </None>
+    <None Include="GLShader.inl">
+      <Filter>GL</Filter>
+    </None>
+    <None Include="SDX_Window.inl">
+      <Filter>SDX</Filter>
+    </None>
+    <None Include="GLUniform.inl">
+      <Filter>GL</Filter>
+    </None>
+    <None Include="SDX_Display.inl">
+      <Filter>SDX</Filter>
+    </None>
+    <None Include="pass1_gbuffer.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass1_gbuffer.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass2_deferred.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass2_deferred.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass2_depth.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass2_diffuse.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass2_normal.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass2_position.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass2_specular.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass3_lights.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pass3_lights.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
