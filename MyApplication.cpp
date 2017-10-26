@@ -29,9 +29,6 @@
 
 using opengl::GL;
 
-const int MOUSE_X_LOCK = 100;
-const int MOUSE_Y_LOCK = 100;
-
 const float PI_ = 3.14159265359f;
 
 const float NEAR_PLANE = 0.1f;
@@ -69,6 +66,7 @@ int MyApplication::Init(const char *title, const WindowSettings &settings, int w
 		sdx::System::PrintError(__FILE__, __LINE__, "Error initializing SDL");
 		return EXIT_FAILURE;
 	}
+	Mouse::HideCursor();
 
 	Keyboard::OnPress = OnKeyPressCallback;
 	Window::OnResize = OnResizeCallback;
@@ -99,24 +97,25 @@ int MyApplication::Init(const char *title, const WindowSettings &settings, int w
 void MyApplication::Update(Uint32 ticks)
 {
 	float deltaTime = float(ticks);
-
-	// Compute new orientation
-	horizontalAngle -= TURN_SPEED * (Mouse::X() - MOUSE_X_LOCK);
-	verticalAngle -= TURN_SPEED * (Mouse::Y() - MOUSE_Y_LOCK);
-	Mouse::SetPosition(_win, MOUSE_X_LOCK, MOUSE_Y_LOCK); // lock mouse to window
 	float moveSpeed = 1.0f;
+	if (_win.IsInputFocused()) {
+		// Compute new orientation
+		horizontalAngle -= TURN_SPEED * (Mouse::X() - MOUSE_X_LOCK);
+		verticalAngle -= TURN_SPEED * (Mouse::Y() - MOUSE_Y_LOCK);
+		Mouse::SetPosition(_win, MOUSE_X_LOCK, MOUSE_Y_LOCK); // lock mouse to window
 
-	if (horizontalAngle < 0.0f) {
-		horizontalAngle += 2 * PI_;
-	}
-	else if (horizontalAngle > 2 * PI_) {
-		horizontalAngle -= 2 * PI_;
-	}
-	if (verticalAngle < -PI_ * 0.47f) {
-		verticalAngle = -PI_ * 0.47f;
-	}
-	else if (verticalAngle > PI_ * 0.47f) {
-		verticalAngle = PI_ * 0.47f;
+		if (horizontalAngle < 0.0f) {
+			horizontalAngle += 2 * PI_;
+		}
+		else if (horizontalAngle > 2 * PI_) {
+			horizontalAngle -= 2 * PI_;
+		}
+		if (verticalAngle < -PI_ * 0.47f) {
+			verticalAngle = -PI_ * 0.47f;
+		}
+		else if (verticalAngle > PI_ * 0.47f) {
+			verticalAngle = PI_ * 0.47f;
+		}
 	}
 
 	// camera presets
@@ -136,9 +135,9 @@ void MyApplication::Update(Uint32 ticks)
 		horizontalAngle = 0.0f;
 	}
 	else if (Keyboard::IsKeyPressed(Key::F4)) {
-		position = glm::vec3(2.7251, -2.1234, -6.0708);
-		verticalAngle = -0.0145;
-		horizontalAngle = 5.4352;
+		position = glm::vec3(2.7251f, -2.1234f, -6.0708f);
+		verticalAngle = -0.0145f;
+		horizontalAngle = 5.4352f;
 	}
 	else if (Keyboard::IsKeyPressed(Key::F5)) {
 		position = glm::vec3(2.4234f, 0.2537f, -6.2569f);

@@ -126,7 +126,7 @@ public:
 	GLUniformB(int location)
 		: _loc(location) { }
 	bool operator==(const GLUniformB &other) const;
-	void SetLocation(int location) const;
+	void SetLocation(int location);
 	int GetLocation() const;
 	// Does a fast check and hard validation.
 	bool Exists() const;

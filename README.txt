@@ -1,4 +1,5 @@
 Movement: WASD
+Fast Movement: Shift + WASD
 View Angle: Mouse
 
 Shader Hotkeys: 1-6

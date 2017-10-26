@@ -260,6 +260,10 @@ inline int GLUniformB::GetLocation() const {
 	return _loc;
 }
 
+inline void GLUniformB::SetLocation(int location) {
+	_loc = location;
+}
+
 inline bool GLUniformB::Exists() const {
 	return _loc >= 0;
 }

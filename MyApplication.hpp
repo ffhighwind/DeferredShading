@@ -64,15 +64,13 @@ protected:
 	DeferredShader _ds;
 
 	const std::string MODEL_FILE = ".\\models\\sponza\\sponza.obj";
-	//const std::string MODEL_FILE = ".\\models\\sponza\\sponza.3ds";
-	//const std::string MODEL_FILE = ".\\models\\nanosuit\\nanosuit.obj";
-
 	const float MOVE_SPEED = 0.002f;
 	const float TURN_SPEED = 0.002f;
+	const int MOUSE_X_LOCK = 150;
+	const int MOUSE_Y_LOCK = 150;
 
 	float horizontalAngle = 2.85f;
 	float verticalAngle = -0.35f;
-
 	glm::vec3 position = glm::vec3(0.0f, -0.7f, 4.5f);
 
 	void Update(Uint32 ticks);

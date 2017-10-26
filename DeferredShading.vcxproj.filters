@@ -19,6 +19,15 @@
     <Filter Include="Source Files\STB">
       <UniqueIdentifier>{0051c827-aea7-4c19-b884-662a4a61f9e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libs">
+      <UniqueIdentifier>{305f5008-502b-4622-8c95-c7f01f85aa75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output">
+      <UniqueIdentifier>{b506589e-80f4-40c4-8e48-055324989558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{5d205dba-844a-4cbb-a955-42cf24cda83d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeferredShader.cpp">
@@ -169,5 +178,234 @@
     <None Include="SDX_Window.inl">
       <Filter>Source Files\SDX</Filter>
     </None>
+    <None Include="models\sponza\sponza.mtl">
+      <Filter>Models</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\x86\assimp.lib">
+      <Filter>Libs</Filter>
+    </Library>
+    <Library Include="lib\x86\DevIL.lib">
+      <Filter>Libs</Filter>
+    </Library>
+    <Library Include="lib\x86\glew32.lib">
+      <Filter>Libs</Filter>
+    </Library>
+    <Library Include="lib\x86\glew32s.lib">
+      <Filter>Libs</Filter>
+    </Library>
+    <Library Include="lib\x86\ILU.lib">
+      <Filter>Libs</Filter>
+    </Library>
+    <Library Include="lib\x86\ILUT.lib">
+      <Filter>Libs</Filter>
+    </Library>
+    <Library Include="lib\x86\SDL2.lib">
+      <Filter>Libs</Filter>
+    </Library>
+    <Library Include="lib\x86\SDL2main.lib">
+      <Filter>Libs</Filter>
+    </Library>
+    <Library Include="lib\x86\SDL2test.lib">
+      <Filter>Libs</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="attachment_specular.jpg">
+      <Filter>Output</Filter>
+    </Image>
+    <Image Include="attachment_albedo.jpg">
+      <Filter>Output</Filter>
+    </Image>
+    <Image Include="attachment_depth.jpg">
+      <Filter>Output</Filter>
+    </Image>
+    <Image Include="attachment_final.jpg">
+      <Filter>Output</Filter>
+    </Image>
+    <Image Include="attachment_normal.jpg">
+      <Filter>Output</Filter>
+    </Image>
+    <Image Include="attachment_position.jpg">
+      <Filter>Output</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\background.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\background_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\background_ddn.tif">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\chain_texture.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\chain_texture_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\chain_texture_mask.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\lion.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\lion_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\lion2_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\spnza_bricks_a_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\spnza_bricks_a_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\spnza_bricks_a_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_arch_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_arch_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_arch_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_ceiling_a_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_ceiling_a_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_a_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_a_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_a_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_b_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_b_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_b_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_c_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_c_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_column_c_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_curtain_blue_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_curtain_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_curtain_green_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_details_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_details_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_fabric_blue_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_fabric_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_fabric_green_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_fabric_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_flagpole_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_flagpole_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_floor_a_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_floor_a_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_roof_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_thorn_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_thorn_diff.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_thorn_mask.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\sponza_thorn_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_dif.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_hanging.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_plant.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_plant_mask.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_plant_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_round.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_round_ddn.tga">
+      <Filter>Models</Filter>
+    </Image>
+    <Image Include="models\sponza\textures\vase_round_spec.tga">
+      <Filter>Models</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="models\sponza\README.txt">
+      <Filter>Models</Filter>
+    </Text>
+    <Text Include="README.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="models\sponza\sponza.obj">
+      <Filter>Models</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="video demonstration.mp4">
+      <Filter>Output</Filter>
+    </Media>
   </ItemGroup>
 </Project>
