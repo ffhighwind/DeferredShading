@@ -20,13 +20,18 @@ out vec3 Bitangent0;
 
 void main()
 {
+	// Transform position from model space to world space.
 	vec4 worldPosition = ModelMatrix * vec4(Position, 1.0);
-
 	Position0 = worldPosition.xyz;
 	TexCoord0 = TexCoord;
+
+	// Normal, Tangent, Bitangent used to calculate TBN Matrix for normal mapping.
 	Normal0 = normalize(NormalMatrix * Normal);
 	Tangent0 = normalize(NormalMatrix * Tangent);
 	Bitangent0 = normalize(NormalMatrix * Bitangent);
 
+	// Transform position from world space to projection/camera space.
+	// This allows forclipping and depth culling, and stores the depth value.
 	gl_Position = ProjectionMatrix * ViewMatrix * worldPosition;
+
 }
