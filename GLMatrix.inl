@@ -75,7 +75,7 @@ inline void GLMatrix::Mult(const float *mat4x4)
 inline void GLMatrix::Mult(const glm::mat4 &mat4x4)
 {
 	_modelMatrix = _modelMatrix * mat4x4;
-	BindModelMatrix();
+	//BindModelMatrix();
 }
 
 inline void GLMatrix::Push()
@@ -86,7 +86,7 @@ inline void GLMatrix::Push()
 inline void GLMatrix::Identity()
 {
 	_modelMatrix = glm::mat4();
-	BindModelMatrix();
+	//BindModelMatrix();
 }
 
 inline void GLMatrix::Translate(float x, float y, float z)
@@ -102,7 +102,7 @@ inline void GLMatrix::Translate(const float *vec3)
 inline void GLMatrix::Translate(const glm::vec3 &vec3)
 {
 	_modelMatrix = glm::translate(_modelMatrix, vec3);
-	BindModelMatrix();
+	//BindModelMatrix();
 }
 
 inline void GLMatrix::Scale(float scalar)
@@ -123,7 +123,7 @@ inline void GLMatrix::Scale(const float *scalars)
 inline void GLMatrix::Scale(const glm::vec3 &scalars)
 {
 	_modelMatrix = glm::scale(_modelMatrix, scalars);
-	BindModelMatrix();
+	//BindModelMatrix();
 }
 
 inline void GLMatrix::Rotate(float radians, float x, float y, float z)
@@ -139,7 +139,7 @@ inline void GLMatrix::Rotate(float radians, const float *scalars)
 inline void GLMatrix::Rotate(float radians, const glm::vec3 &scalars)
 {
 	_modelMatrix = glm::rotate(_modelMatrix, radians, scalars);
-	BindModelMatrix();
+	//BindModelMatrix();
 }
 
 inline void GLMatrix::RotateDeg(float degrees, float x, float y, float z)
@@ -155,7 +155,7 @@ inline void GLMatrix::RotateDeg(float degrees, const float *axis)
 inline void GLMatrix::RotateDeg(float degrees, const glm::vec3 &axis)
 {
 	_modelMatrix = glm::rotate(_modelMatrix, degrees * (3.14159265358979323846f / 180.0f), axis);
-	BindModelMatrix();
+	//BindModelMatrix();
 }
 
 //
@@ -165,37 +165,37 @@ inline void GLMatrix::RotateDeg(float degrees, const glm::vec3 &axis)
 inline void GLMatrix::SetCamera(float posX, float posY, float posZ, float lookAtX, float lookAtY, float lookAtZ)
 {
 	_viewMatrix = glm::lookAt(glm::vec3(posX, posY, posZ), glm::vec3(lookAtX, lookAtY, lookAtZ), glm::vec3(0.0f, 1.0f, 0.0f));
-	BindViewMatrix();
+	//BindViewMatrix();
 }
 
 inline void GLMatrix::SetCamera(float posX, float posY, float posZ, float lookAtX, float lookAtY, float lookAtZ, float upX, float upY, float upZ)
 {
 	_viewMatrix = glm::lookAt(glm::vec3(posX, posY, posZ), glm::vec3(lookAtX, lookAtY, lookAtZ), glm::vec3(upX, upY, upZ));
-	BindViewMatrix();
+	//BindViewMatrix();
 }
 
 inline void GLMatrix::SetCamera(const float *pos, const float *lookAt)
 {
 	_viewMatrix = glm::lookAt(glm::make_vec3(pos), glm::make_vec3(lookAt), glm::vec3(0.0f, 1.0f, 0.0f));
-	BindViewMatrix();
+	//BindViewMatrix();
 }
 
 inline void GLMatrix::SetCamera(const float *pos, const float *lookAt, const float *up)
 {
 	_viewMatrix = glm::lookAt(glm::make_vec3(pos), glm::make_vec3(lookAt), glm::make_vec3(up));
-	BindViewMatrix();
+	//BindViewMatrix();
 }
 
 inline void GLMatrix::SetCamera(const glm::vec3 &pos, const glm::vec3 &lookAt)
 {
 	_viewMatrix = glm::lookAt(pos, lookAt, glm::vec3(0.0f, 1.0f, 0.0f));
-	BindViewMatrix();
+	//BindViewMatrix();
 }
 
 inline void GLMatrix::SetCamera(const glm::vec3 &pos, const glm::vec3 &lookAt, const glm::vec3 &up)
 {
 	_viewMatrix = glm::lookAt(pos, lookAt, up);
-	BindViewMatrix();
+	//BindViewMatrix();
 }
 
 //
@@ -205,37 +205,37 @@ inline void GLMatrix::SetCamera(const glm::vec3 &pos, const glm::vec3 &lookAt, c
 inline void GLMatrix::SetPerspective(float fovRadians, float aspectRatio, float nearPlane, float farPlane)
 {
 	_projMatrix = glm::perspective(fovRadians, aspectRatio, nearPlane, farPlane);
-	BindProjMatrix();
+	//BindProjMatrix();
 }
 
 inline void GLMatrix::SetPerspective(float fovRadians, float width, float height, float nearPlane, float farPlane)
 {
 	_projMatrix = glm::perspectiveFov(fovRadians, width, height, nearPlane, farPlane);
-	BindProjMatrix();
+	//BindProjMatrix();
 }
 
 inline void GLMatrix::SetInfinitePerspective(float fovRadians, float width, float height, float nearPlane)
 {
 	_projMatrix = glm::infinitePerspective(fovRadians, width/height, nearPlane);
-	BindProjMatrix();
+	//BindProjMatrix();
 }
 
 inline void GLMatrix::SetInfinitePerspective(float fovRadians, float aspectRatio, float nearPlane)
 {
 	_projMatrix = glm::infinitePerspective(fovRadians, aspectRatio, nearPlane);
-	BindProjMatrix();
+	//BindProjMatrix();
 }
 
 inline void GLMatrix::SetOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane)
 {
 	_projMatrix = glm::ortho(left, right, bottom, top, nearPlane, farPlane);
-	BindProjMatrix();
+	//BindProjMatrix();
 }
 
 inline void GLMatrix::SetOrtho(float left, float right, float bottom, float top)
 {
 	_projMatrix = glm::ortho(left, right, bottom, top);
-	BindProjMatrix();
+	//BindProjMatrix();
 }
 
 } // namespace opengl

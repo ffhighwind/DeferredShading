@@ -72,6 +72,12 @@
     <ClCompile Include="SDX_Window.cpp">
       <Filter>Source Files\SDX</Filter>
     </ClCompile>
+    <ClCompile Include="GLModelLoader.cpp">
+      <Filter>Source Files\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="MyShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeferredShader.hpp">
@@ -122,6 +128,15 @@
     <ClInclude Include="stb_image.hpp">
       <Filter>Source Files\STB</Filter>
     </ClInclude>
+    <ClInclude Include="GLModelLoader.hpp">
+      <Filter>Source Files\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="pass1_gbuffer_d.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="MyShader.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GLMatrix.inl">
@@ -137,12 +152,6 @@
       <Filter>Source Files\GL</Filter>
     </None>
     <None Include="pass3_lights.frag">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="pass1_gbuffer.frag">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="pass1_gbuffer.vert">
       <Filter>Source Files\Shaders</Filter>
     </None>
     <None Include="pass2_deferred.frag">
@@ -180,6 +189,15 @@
     </None>
     <None Include="models\sponza\sponza.mtl">
       <Filter>Models</Filter>
+    </None>
+    <None Include="pass1_gbuffer.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="pass1_gbuffer.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="pass1_gbuffer_dn.frag">
+      <Filter>Source Files\Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -402,9 +420,15 @@
     <Object Include="models\sponza\sponza.obj">
       <Filter>Models</Filter>
     </Object>
+    <Object Include="models\lucy.obj">
+      <Filter>Models</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <Media Include="video demonstration.mp4">
+      <Filter>Output</Filter>
+    </Media>
+    <Media Include="video demonstration 2.mp4">
       <Filter>Output</Filter>
     </Media>
   </ItemGroup>

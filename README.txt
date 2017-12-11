@@ -8,3 +8,5 @@ Camera Presets: F1-F6
 Light Rotation: R
 Print Camera: O
 Save Images: P
+Randomize Lights: L
+Quit: ESC

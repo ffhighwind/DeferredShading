@@ -47,6 +47,7 @@
 
 #include "GLProgram.hpp"
 #include "GLModel.hpp"
+#include "GLModelLoader.hpp"
 #include "DeferredShader.hpp"
 
 namespace sdx {
@@ -60,10 +61,12 @@ public:
 
 protected:
 	opengl::GLProgram _p;
-	opengl::GLModel _model;
+	opengl::GLModel *_model1, *_model2;
+	opengl::GLModelLoader _modelLoader;
 	DeferredShader _ds;
 
-	const std::string MODEL_FILE = ".\\models\\sponza\\sponza.obj";
+	const std::string SPONZA_FILE = ".\\models\\sponza\\sponza.obj";
+	const std::string LUCY_FILE = ".\\models\\lucy.obj";
 	const float MOVE_SPEED = 0.002f;
 	const float TURN_SPEED = 0.002f;
 	const int MOUSE_X_LOCK = 150;

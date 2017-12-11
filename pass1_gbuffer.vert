@@ -33,5 +33,4 @@ void main()
 	// Transform position from world space to projection/camera space.
 	// This allows forclipping and depth culling, and stores the depth value.
 	gl_Position = ProjectionMatrix * ViewMatrix * worldPosition;
-
 }

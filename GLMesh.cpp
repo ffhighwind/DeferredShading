@@ -11,28 +11,34 @@ void GLMesh::Draw(GLuint shaderID) const
 	unsigned int specularNr = 1;
 	unsigned int normalNr = 1;
 	unsigned int heightNr = 1;
-	glUniform1i(glGetUniformLocation(shaderID, "has_normal_map"), GL_FALSE);
-	for (unsigned int i = 0; i < textures.size(); ++i) {
+	for (unsigned int i = 0; i < _textures.size(); ++i) {
 		glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
 		// retrieve texture number (the N in diffuse_textureN)
-		std::stringstream ss;
-		std::string number;
-		std::string name = textures[i].type;
-		if (name == "texture_diffuse")
-			ss << diffuseNr++; // transfer unsigned int to stream
-		else if (name == "texture_specular")
-			ss << specularNr++; // transfer unsigned int to stream
-		else if (name == "texture_normal") {
-			ss << normalNr++; // transfer unsigned int to stream
-			glUniform1i(glGetUniformLocation(shaderID, "has_normal_map"), GL_TRUE);
+		std::string name;
+		if (_textures[i].type == TextureType::Diffuse) {
+			name = "texture_diffuse" + std::to_string(diffuseNr);
+			diffuseNr++;
 		}
-		else if (name == "texture_height")
-			ss << heightNr++; // transfer unsigned int to stream
-		number = ss.str();
+		else if (_textures[i].type == TextureType::Specular) {
+			name = "texture_specular" + std::to_string(specularNr);
+			specularNr++;
+		}
+		else if (_textures[i].type == TextureType::Normal) {
+			name = "texture_normal" + std::to_string(normalNr);
+			normalNr++;
+		}
+		else if (_textures[i].type == TextureType::Height) {
+			//name = "texture_height" + std::to_string(heightNr);
+			//heightNr++;
+			continue;
+		}
+		else {
+			continue; //invalid texture
+		}
 		// now set the sampler to the correct texture unit
-		glUniform1i(glGetUniformLocation(shaderID, (name + number).c_str()), i);
+		glUniform1i(glGetUniformLocation(shaderID, name.c_str()), i);
 		// and finally bind the texture
-		glBindTexture(GL_TEXTURE_2D, textures[i].id);
+		glBindTexture(GL_TEXTURE_2D, _textures[i].id);
 	}
 
 	// draw mesh
@@ -41,18 +47,18 @@ void GLMesh::Draw(GLuint shaderID) const
 	glBindVertexArray(0);
 
 	// set everything back to defaults
-	for (unsigned int i = 0; i < textures.size(); ++i) {
-		glActiveTexture(GL_TEXTURE0 + i);
+	for (unsigned int i = 0; i < _textures.size(); ++i) {
+		glActiveTexture(_textures[i].id);
 		glBindTexture(GL_TEXTURE_2D, 0); // default black texture
 	}
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
 }
 
 void GLMesh::Load(const std::vector<GLVertex> &vertices, const std::vector<GLuint> &indices, const std::vector<GLTexture> &textures)
 {
 	//this->vertices = vertices;
 	//this->indices = indices;
-	this->textures = textures;
+	_textures = textures;
 	_numTriangles = indices.size();
 
 	// create buffers/arrays
@@ -103,5 +109,16 @@ GLuint GLMesh::Id() const
 {
 	return _vao;
 }
+
+bool GLMesh::HasTextureMap(TextureType type) const
+{
+	for (auto iter = _textures.begin(); iter != _textures.end(); iter++) {
+		if (iter->type == type) {
+			return true;
+		}
+	}
+	return false;
+}
+
 
 } // namespace opengl

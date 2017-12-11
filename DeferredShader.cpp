@@ -24,10 +24,9 @@ bool DeferredShader::Init(int w, int h)
 	if (!InitGBuffer() || !InitShaders()) {
 		return false;
 	}
-	InitLights();
+	InitLights(RAND_SEED);
 	InitQuad();
 	InitCube();
-
 
 	return true;
 }
@@ -88,6 +87,15 @@ bool DeferredShader::InitShaders()
 	if (!_shaderGBuffer.Create(PASS1_VS, PASS1_FS)) {
 		return false;
 	}
+	if (!_shaderGBuffer_DN.Create(PASS1_VS, PASS1_DN_FS)) {
+		return false;
+	}
+	if (!_shaderGBuffer_D.Create(PASS1_VS, PASS1_D_FS)) {
+		return false;
+	}
+	if (!_shaderGBuffer.Create(PASS1_VS, PASS1_FS)) {
+		return false;
+	}
 	if (!_shaderDeferred.Create(PASS2_VS, PASS2_FS)) {
 		return false;
 	}
@@ -140,16 +148,7 @@ bool DeferredShader::InitShaders()
 	//_shaderDepth.GetUniform("NearPlane").Set(_nearPlane);
 	//_shaderDepth.GetUniform("FarPlane").Set(_farPlane);
 
-	_model1 = _shaderGBuffer.GetUniform("ModelMatrix").GetLocation();
-	_view1 = _shaderGBuffer.GetUniform("ViewMatrix").GetLocation();
-	_proj1 = _shaderGBuffer.GetUniform("ProjectionMatrix").GetLocation();
-	_norm1 = _shaderGBuffer.GetUniform("NormalMatrix").GetLocation();
-
-	_model2 = _shaderLights.GetUniform("ModelMatrix").GetLocation();
-	_view2 = _shaderLights.GetUniform("ViewMatrix").GetLocation();
-	_proj2 = _shaderLights.GetUniform("ProjectionMatrix").GetLocation();
-
-	return _shaderLights.Validate();
+	return _shaderLights.GetProgram().Validate();
 }
 
 void DeferredShader::SetDrawMode(DeferredBuffer mode)
@@ -157,25 +156,36 @@ void DeferredShader::SetDrawMode(DeferredBuffer mode)
 	_drawMode = mode;
 }
 
-void DeferredShader::InitLights()
+void DeferredShader::RandomizeLights(unsigned int seed)
 {
-	srand(RAND_CONST);
-	for (unsigned int i = 0; i < NUM_LIGHTS; i++) {
+	srand(seed);
+	for (unsigned int i = 0; i < NUM_LIGHTS; i++)
+	{
 		// positions
-		float x = ((rand() % 1000) / 1000.0f) * WORLD_SCALE - WORLD_SCALE / 2.0f;
-		float y = ((rand() % 1000) / 1000.0f) * WORLD_SCALE - WORLD_SCALE / 2.0f;
-		float z = ((rand() % 1000) / 1000.0f) * WORLD_SCALE - WORLD_SCALE / 2.0f;
-		x *= 1.7f;
-		y *= 0.9f;
-		z *= 1.7f;
-		_lightPositions.push_back(glm::vec3(x, y, z));
-		// colors
+		float x = 2.0f * ((rand() % 1000) / 1000.0f) * WORLD_SCALE - WORLD_SCALE; // random between WORLD_SCALE and -WORLD_SCALE
+		float y = 2.0f * ((rand() % 1000) / 1000.0f) * WORLD_SCALE - WORLD_SCALE; // random between WORLD_SCALE and -WORLD_SCALE
+		float z = 2.0f * ((rand() % 1000) / 1000.0f) * WORLD_SCALE - WORLD_SCALE; // random between WORLD_SCALE and -WORLD_SCALE
+		x *= 0.9f;
+		y *= 0.45f;
+		z *= 0.9f;
+		_lightPositions[i] = glm::vec3(x, y, z);
 		float r = ((rand() % 1000) / 1000.0f)*0.6f + 0.4f; // between 0.6 and 1.0
 		float g = ((rand() % 1000) / 1000.0f)*0.6f + 0.4f; // between 0.6 and 1.0
 		float b = ((rand() % 1000) / 1000.0f)*0.6f + 0.4f; // between 0.6 and 1.0
-		_lightColors.push_back(glm::vec3(r, g, b));
+		_lightColors[i] = glm::vec3(r, g, b);
 	}
 	SetLights();
+}
+
+void DeferredShader::InitLights(unsigned int seed)
+{
+	for (unsigned int i = 0; i < NUM_LIGHTS; i++) {
+		// positions
+		_lightPositions.push_back(glm::vec3());
+		// colors
+		_lightColors.push_back(glm::vec3());
+	}
+	RandomizeLights(RAND_SEED);
 }
 
 void DeferredShader::SetPerspective(float nearPlane, float farPlane)
@@ -184,7 +194,7 @@ void DeferredShader::SetPerspective(float nearPlane, float farPlane)
 	_farPlane = farPlane;
 }
 
-void DeferredShader::Render(float ticks, const opengl::GLModel &model, const glm::vec3 &camPosition)
+void DeferredShader::Render(float ticks, const opengl::GLModel &model1, const opengl::GLModel &model2, const glm::vec3 &camPosition)
 {
 	if (_isRotating) {
 		_rotationAngle += ROTATION_CONSTANT;
@@ -192,50 +202,83 @@ void DeferredShader::Render(float ticks, const opengl::GLModel &model, const glm
 	switch (_drawMode) 
 	{
 		case DeferredBuffer::Deferred:
-			Pass1_GBuffer(model);
+			Pass1_GBuffer(model1, model2);
 			Pass2_DeferredShading(camPosition);
 			Pass3_Lights();
 			break;
 		case DeferredBuffer::Diffuse:
-			Pass1_GBuffer(model);
+			Pass1_GBuffer(model1, model2);
 			Pass2_BufferMode(_shaderDiffuse);
 			break;
 		case DeferredBuffer::Specular:
-			Pass1_GBuffer(model);
+			Pass1_GBuffer(model1, model2);
 			Pass2_BufferMode(_shaderSpecular);
 			break;
 		case DeferredBuffer::Normal:
-			Pass1_GBuffer(model);
+			Pass1_GBuffer(model1, model2);
 			Pass2_BufferMode(_shaderNormal);
 			break;
 		case DeferredBuffer::Position:
-			Pass1_GBuffer(model);
+			Pass1_GBuffer(model1, model2);
 			Pass2_BufferMode(_shaderPosition);
 			break;
 		case DeferredBuffer::Depth:
-			Pass1_GBuffer(model);
+			Pass1_GBuffer(model1, model2);
 			Pass2_DepthMode();
 			break;
 	}
 }
 
-void DeferredShader::Pass1_GBuffer(const opengl::GLModel &model)
+void DeferredShader::Pass1_GBuffer(const opengl::GLModel &model1, const opengl::GLModel &model2)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, _gBuffer);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	_shaderGBuffer.Bind();
-	GL.SetUniforms(_model1, _view1, _proj1, _norm1);
 	GL.Identity();
 	GL.RotateDeg(90.0f, 0.0f, 1.0f, 0.0f);
 	GL.Translate(0.0f, -WORLD_SCALE / 2.0f, 0.0f);
 	GL.Scale(3*WORLD_SCALE);
+	GL.Scale(model1.GetScaleFactor());
 	GL.BuildNormalMatrix();
+	DrawModel(model1);
+
+	GL.Identity();
+	GL.RotateDeg(45.0f, 0.0f, 1.0f, 0.0f);
+	GL.Translate(0.0f, -WORLD_SCALE / 2.0f, 0.0f);
+	GL.Scale(0.4f * WORLD_SCALE);
+	GL.Scale(model2.GetScaleFactor());
+	GL.BuildNormalMatrix();
+	_shaderGBuffer.Bind();
 	GL.Bind();
-	model.Draw(_shaderGBuffer.Id());
+	model2.Draw(_shaderGBuffer.Id());
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void DeferredShader::DrawModel(const opengl::GLModel &model) const
+{
+	const std::vector<opengl::GLMesh> &meshes = model.GetMeshes();
+	for (auto iter = meshes.begin(); iter != meshes.end(); iter++) {
+		bool hasDiffuse = iter->HasTextureMap(opengl::TextureType::Diffuse);
+		//bool hasSpecular = iter->HasTextureMap(opengl::TextureType::Specular);
+		bool hasNormal = iter->HasTextureMap(opengl::TextureType::Normal);
+		if (hasNormal) {
+			_shaderGBuffer_DN.Bind();
+			GL.Bind();
+			iter->Draw(_shaderGBuffer_DN.Id());
+		}
+		else if (hasDiffuse) {
+			_shaderGBuffer_D.Bind();
+			GL.Bind();
+			iter->Draw(_shaderGBuffer_D.Id());
+		}
+		else {
+			_shaderGBuffer.Bind();
+			GL.Bind();
+			iter->Draw(_shaderGBuffer.Id());
+		}
+	}
 }
 
 void DeferredShader::Pass2_DeferredShading(const glm::vec3 &camPosition)
@@ -312,8 +355,8 @@ void DeferredShader::SetLights()
 void DeferredShader::Pass3_Lights()
 {
 	_shaderLights.Bind();
-	GL.SetUniforms(_model2, _view2, _proj2);
-	GL.BindModelViewProj();
+	//GL.SetUniforms(_model2, _view2, _proj2);
+	//GL.BindModelViewProj();
 	for (unsigned int i = 0; i < _lightPositions.size(); i++) {
 		GL.Identity();
 		glm::mat4 rotMatrix;
@@ -322,7 +365,7 @@ void DeferredShader::Pass3_Lights()
 		GL.Translate(pos);
 		GL.Scale(LIGHT_SCALE);
 		GL.BindModelMatrix();
-		_shaderLights.GetUniform("ObjectColor").Set(_lightColors[i]);
+		_shaderLights.Get("ObjectColor").Set(_lightColors[i]);
 		glBindVertexArray(_cubeVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);

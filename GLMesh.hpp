@@ -1,5 +1,6 @@
 //SOURCE: https://learnopengl.com/code_viewer_gh.php?code=includes/learnopengl/mesh.h
 
+#pragma once
 #ifndef GLMESH_HPP
 #define GLMESH_HPP
 
@@ -29,10 +30,20 @@ struct GLVertex
 };
 
 
+enum class TextureType
+{
+	Unknown = 0,
+	Diffuse,
+	Specular,
+	Normal,
+	Height,
+};
+
+
 struct GLTexture 
 {
 	unsigned int id;
-	std::string type;
+	TextureType type;
 	aiString path;
 };
 
@@ -40,17 +51,15 @@ struct GLTexture
 class GLMesh 
 {
 public:
-	//std::vector<Vertex> vertices;
-	//std::vector<GLuint> indices;
-
 	GLMesh() { }
 	void Load(const std::vector<GLVertex> &vertices, const std::vector<GLuint> &indices, const std::vector<GLTexture> &textures);
 	void Unload();
 	void Draw(GLuint shaderID) const;
 	GLuint Id() const; // vao ID
+	bool HasTextureMap(TextureType type) const;
 
 private:
-	std::vector<GLTexture> textures;
+	std::vector<GLTexture> _textures;
 	int _numTriangles;
 	GLuint _vao;
 	GLuint _vbo;
@@ -58,5 +67,5 @@ private:
 };
 
 
-#endif // GLMESH_HPP
 } // namespace opengl
+#endif // GLMESH_HPP

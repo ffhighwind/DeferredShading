@@ -28,7 +28,6 @@ void GLMatrix::Bind()
 	glUniformMatrix3fv(_normalLoc, 1, GL_FALSE, glm::value_ptr(_normalMatrix));
 };
 
-
 glm::vec3 GLMatrix::GetPosition() const
 {
 	glm::mat4 inverseView = inverse(_viewMatrix);
@@ -40,7 +39,6 @@ glm::vec3 GLMatrix::GetDirection() const
 	glm::mat4 inverseView = inverse(_viewMatrix);
 	return inverseView * glm::vec4(0.0, 0.0, 1.0, 0.0);
 }
-
 
 void GLMatrix::GetCamera(glm::vec3 &camPosition, glm::vec3 &camDirection) const
 {

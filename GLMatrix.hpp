@@ -36,10 +36,10 @@
 
 namespace opengl {
 
-struct GLMatrix;
+class GLMatrix;
 extern GLMatrix GL;
 
-struct GLMatrix
+class GLMatrix
 {
 private:
 	glm::mat4 _modelMatrix;

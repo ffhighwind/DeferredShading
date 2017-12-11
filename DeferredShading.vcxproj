@@ -134,10 +134,12 @@
     <ClCompile Include="GLMatrix.cpp" />
     <ClCompile Include="GLMesh.cpp" />
     <ClCompile Include="GLModel.cpp" />
+    <ClCompile Include="GLModelLoader.cpp" />
     <ClCompile Include="GLProgram.cpp" />
     <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyApplication.cpp" />
+    <ClCompile Include="MyShader.cpp" />
     <ClCompile Include="SDX_Application.cpp" />
     <ClCompile Include="SDX_Display.cpp" />
     <ClCompile Include="SDX_Keyboard.cpp" />
@@ -150,10 +152,13 @@
     <ClInclude Include="GLMatrix.hpp" />
     <ClInclude Include="GLMesh.hpp" />
     <ClInclude Include="GLModel.hpp" />
+    <ClInclude Include="GLModelLoader.hpp" />
     <ClInclude Include="GLProgram.hpp" />
     <ClInclude Include="GLShader.hpp" />
     <ClInclude Include="GLUniform.hpp" />
     <ClInclude Include="MyApplication.hpp" />
+    <ClInclude Include="MyShader.hpp" />
+    <ClInclude Include="pass1_gbuffer_d.frag" />
     <ClInclude Include="SDX_Application.hpp" />
     <ClInclude Include="SDX_Display.hpp" />
     <ClInclude Include="SDX_Keyboard.hpp" />
@@ -173,6 +178,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
     <None Include="pass1_gbuffer.frag" />
+    <None Include="pass1_gbuffer_dn.frag" />
     <None Include="pass1_gbuffer.vert" />
     <None Include="pass2_deferred.frag" />
     <None Include="pass2_deferred.vert" />
@@ -471,12 +477,17 @@
     <Text Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Object Include="models\lucy.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Object>
     <Object Include="models\sponza\sponza.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </Object>
   </ItemGroup>
   <ItemGroup>
+    <Media Include="video demonstration 2.mp4" />
     <Media Include="video demonstration.mp4" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

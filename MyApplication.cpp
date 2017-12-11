@@ -24,6 +24,7 @@
 #include "GLShader.hpp"
 #include <iostream>
 #include <string>
+#include <time.h>
 
 #include "GLMatrix.hpp"
 
@@ -87,7 +88,9 @@ int MyApplication::Init(const char *title, const WindowSettings &settings, int w
 	Mouse::SetPosition(_win, MOUSE_X_LOCK, MOUSE_Y_LOCK);
 	Mouse::Update();
 
-	if (!_model.Load(MODEL_FILE, false, true) || !_ds.Init(_win.Width(), _win.Height())) {
+	_model1 = _modelLoader.Load(SPONZA_FILE, false, true);
+	_model2 = _modelLoader.Load(LUCY_FILE, false);
+	if (!_model1 || !_model2 || !_ds.Init(_win.Width(), _win.Height())) {
 		return EXIT_FAILURE;
 	}
 	_ds.SetPerspective(NEAR_PLANE, FAR_PLANE);
@@ -199,6 +202,12 @@ void MyApplication::Update(Uint32 ticks)
 		printf("verticalAngle = %1.4f;\n", verticalAngle);
 		printf("horizontalAngle = %1.4f;\n", horizontalAngle);
 	}
+	// print camera position and direction
+	if (Keyboard::IsKeyPressed(Key::L)) {
+		unsigned int seed = time(0);
+		printf("seed = %d\n", seed);
+		_ds.RandomizeLights(seed);
+	}
 
 	// change shaders
 	if (Keyboard::IsKeyPressed(Key::_1)) {
@@ -229,7 +238,7 @@ void MyApplication::Draw(Uint32 ticks)
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	GL.Identity();
-	_ds.Render((float)ticks, _model, position);
+	_ds.Render((float)ticks, *_model1, *_model2, position);
 }
 
 bool MyApplication::OnQuit() 
